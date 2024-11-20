@@ -104,7 +104,7 @@
             <input type="file" id="input">
             Drag ROM file or click here
         </div>
-        <p><a href="https://drive.google.com/drive/folders/1-5MfqfeH1I89fGM38ysTCZkkoKZp_yyv?usp=sharing" style="color:gray;font-weight:bold;text-decoration:underline;">View a library of ROMS to download by clicking here.</a></p>
+        <p id="library"><a href="https://drive.google.com/drive/folders/1-5MfqfeH1I89fGM38ysTCZkkoKZp_yyv?usp=sharing" style="color:gray;font-weight:bold;text-decoration:underline;">View a library of ROMS to download by clicking here.</a></p>
         <script>
             let enableDebug = false;
             let enableThreads = false;
@@ -229,10 +229,12 @@
                 div.id = "display"
 
                 const top = document.getElementById("top");
+                const link = document.getElementById("library");
                 top.remove();
-                box.remove()
-                div.appendChild(sub)
-                document.body.appendChild(div)
+                box.remove();
+                link.remove();
+                div.appendChild(sub);
+                document.body.appendChild(div);
 
                 window.EJS_player = "#game";
                 window.EJS_gameName = parts.shift();
