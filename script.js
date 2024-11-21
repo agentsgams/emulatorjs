@@ -23,35 +23,38 @@ if (urlParams.get('threads') == 1) {
     console.log("Threads are disabled");
 }
 
-function getCore() {
-    await (async (ext) => {
+input.onchange = async () => {
+    const url = input.files[0]
+    const parts = input.files[0].name.split(".")
+
+    const core = await (async (ext) => {
         if (["fds", "nes", "unif", "unf"].includes(ext))
             return "nes"
-    
+
         if (["smc", "fig", "sfc", "gd3", "gd7", "dx2", "bsx", "swc"].includes(ext))
             return "snes"
-    
+
         if (["z64", "n64"].includes(ext))
             return "n64"
-    
+
         if (["pce"].includes(ext))
             return "pce"
-    
+
         if (["ngp", "ngc"].includes(ext))
             return "ngp"
-    
+
         if (["ws", "wsc"].includes(ext))
             return "ws"
-    
+
         if (["col", "cv"].includes(ext))
             return "coleco"
-    
+
         if (["d64"].includes(ext))
             return "vice_x64sc"
-    
+
         if (["nds", "gba", "gb", "z64", "n64"].includes(ext))
             return ext
-    
+
         return await new Promise(resolve => {
             var coreValues = {
                 "Nintendo 64": "n64",
@@ -83,40 +86,34 @@ function getCore() {
                 "Commodore Plus/4": "vice_xplus4",
                 "Commodore PET": "vice_xpet"
             }
-    
+
             const cores = Object.keys(coreValues).sort().reduce(
                 (obj, key) => {
                     obj[key] = coreValues[key];
                     return obj;
                 }, {}
             );
-    
+
             const button = document.createElement("button")
             const select = document.createElement("select")
-    
+
             for (const type in cores) {
                 const option = document.createElement("option")
-    
+
                 option.value = cores[type]
                 option.textContent = type
                 select.appendChild(option)
             }
-    
+
             button.onclick = () => resolve(select[select.selectedIndex].value)
-            button.textContent = "Load game"
+            button.textContent = "Load Game"
             box.innerHTML = ""
-    
+
             box.appendChild(select)
             box.appendChild(button)
         })
     })(parts.pop())
-}
 
-input.onchange = async () => {
-    const url = input.files[0]
-    const parts = input.files[0].name.split(".")
-
-    const core = getCore()
     const div = document.createElement("div")
     const sub = document.createElement("div")
     const script = document.createElement("script")
