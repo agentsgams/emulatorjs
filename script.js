@@ -91,7 +91,8 @@ input.onchange = async () => {
                 (obj, key) => {
                     obj[key] = coreValues[key];
                     return obj;
-                }, {}
+                },
+                {}
             );
 
             const button = document.createElement("button")
@@ -106,7 +107,7 @@ input.onchange = async () => {
             }
 
             button.onclick = () => resolve(select[select.selectedIndex].value)
-            button.textContent = "Load Game"
+            button.textContent = "Load game"
             box.innerHTML = ""
 
             box.appendChild(select)
@@ -134,14 +135,15 @@ input.onchange = async () => {
     window.EJS_biosUrl = "";
     window.EJS_gameUrl = url;
     window.EJS_core = core;
-    window.EJS_pathtodata = "./data/";
+    window.EJS_pathtodata = "data/";
     window.EJS_startOnLoaded = true;
     window.EJS_DEBUG_XX = enableDebug;
     window.EJS_disableDatabases = true;
     window.EJS_threads = enableThreads;
 
-    script.src = "./data/loader.js";
+    script.src = "data/loader.js";
     document.body.appendChild(script);
 }
+
 box.ondragover = () => box.setAttribute("drag", true);
 box.ondragleave = () => box.removeAttribute("drag");
